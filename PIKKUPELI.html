@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>VÄRI PELI</title>
+</head>
+<body>
+
+ 
+    <main>
+        <div id="images">
+            <div id="block1" draggable="true" ondragstart="drag(event)" style="background-color:#000"></div>
+            <div id="block2" draggable="true" ondragstart="drag(event)" style="background-color:#000"></div>
+            <div id="block3" draggable="true" ondragstart="drag(event)" style="background-color:#000"></div>
+            <div id="block4" draggable="true" ondragstart="drag(event)" style="background-color:#000"></div>
+            <div id="block5" draggable="true" ondragstart="drag(event)" style="background-color:#000"></div>
+            <div id="block6" draggable="true" ondragstart="drag(event)" style="background-color:#000"></div>
+            <div id="block7" draggable="true" ondragstart="drag(event)" style="background-color:#000"></div>
+            <div id="block8" draggable="true" ondragstart="drag(event)" style="background-color:#000"></div>
+            <div id="block9" draggable="true" ondragstart="drag(event)" style="background-color:#000"></div>
+
+
+        </div>
+
+        <div id="box">
+            <div id="div1" ondrop="drop(event)" ondragover="move(event)"></div>
+            <div id="div2" ondrop="drop(event)" ondragover="move(event)"></div>
+            <div id="div3" ondrop="drop(event)" ondragover="move(event)"></div>
+            <div id="div4" ondrop="drop(event)" ondragover="move(event)"></div>
+            <div id="div5" ondrop="drop(event)" ondragover="move(event)"></div>
+            <div id="div6" ondrop="drop(event)" ondragover="move(event)"></div>
+            <div id="div7" ondrop="drop(event)" ondragover="move(event)"></div>
+            <div id="div8" ondrop="drop(event)" ondragover="move(event)"></div>
+            <div id="div9" ondrop="drop(event)" ondragover="move(event)"></div>          
+        </div>
+        <button onclick="cange()"><h1>VAIHDA VÄRIÄ</h1></button>
+        <button onclick="del()"><h1>POISTA VÄRI</h1></button>    
+</body>
+</html>
+<style>
+    #block1,
+    #block2,
+    #block3,
+    #block4,
+    #block5,
+    #block6,
+    #block7,
+    #block8,
+    #block9 {
+        height: 150px;
+        width: 150px;
+        display: inline-block;
+        border: 5px solid black;
+        opacity: 70%;
+        display: inline-block;
+    }
+
+    
+    #box div {
+      position: relative;
+      height: 150px;
+      width: 150px;
+      border: 1px solid gray;
+      display: inline-block;
+      margin: 0;
+    }
+</style>
+<script>
+    var i = 1;
+
+    //Seuraavan palikan värin vaihto
+    function cange() {
+
+        $("#block" + i).css("background-color", random_color());
+        if (i < 8) {
+            i++;
+
+        }
+        else {
+            i = 1;
+        }
+    }
+
+    function random_color() {
+
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    //vaihtaa viimeisimmän palikan värin valkoiseen
+    function del() {
+
+        $("#block" + i).css("background-color", "#0000");
+    }
+
+    //Palikoiden liikuttamisen ominaisuudet
+    function move(ev) {
+        ev.preventDefault();
+    }
+
+    function drag(ev) {
+        ev.dataTransfer.setData("box", ev.target.id);
+    }
+
+    function drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("box");
+        ev.target.appendChild(document.getElementById(data));
+    }
+
+
+
+    //MATOPELI
+</script>
